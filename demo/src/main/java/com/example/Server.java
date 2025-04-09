@@ -1,4 +1,4 @@
-package java.v1;
+package com.example;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -7,9 +7,9 @@ public class Server {
     public static void main(String[] args) {
         try {
             DatabaseManager dbManager = new DatabaseManager(
-                "jdbc:postgresql://localhost:5432/mydb", 
-                "user", 
-                "password"
+                "jdbc:postgresql://localhost:5433/mydb", 
+                "myuser", 
+                "1488"
             );
             RemoteDatabaseManagerImpl service = new RemoteDatabaseManagerImpl(dbManager);
             Registry registry = LocateRegistry.createRegistry(1099);

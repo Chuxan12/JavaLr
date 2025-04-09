@@ -1,8 +1,0 @@
-<dependencies>
-    <!-- PostgreSQL JDBC Driver -->
-    <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>42.7.3</version> <!-- Проверьте актуальную версию на Maven Central -->
-    </dependency>
-</dependencies>
