@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import com.fasterxml.jackson.annotation.JsonIgnore; 
 
 public class GameState {
     private List<Point> snake;
@@ -13,7 +14,7 @@ public class GameState {
     private boolean gameOver;
     private static final int WIDTH = 30;
     private static final int HEIGHT = 30;
-    private Random random = new Random();
+    private long startTime;
 
     public GameState() {
         snake = new ArrayList<>();
@@ -21,9 +22,20 @@ public class GameState {
         direction = Direction.RIGHT;
         generateNewTarget();
         score = 0;
+        startTime = System.currentTimeMillis();
         gameOver = false;
     }
 
+    @JsonIgnore
+    private Random random = new Random();
+
+    public int getLength() {
+        return snake.size();
+    }
+    
+    public long getElapsedSeconds() {
+        return (System.currentTimeMillis() - startTime) / 1000;
+    }
     public List<Point> getSnake() { return snake; }
     public Point getTarget() { return target; }
     public Direction getDirection() { return direction; }

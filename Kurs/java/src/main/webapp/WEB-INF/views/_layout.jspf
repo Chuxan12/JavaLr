@@ -1,0 +1,24 @@
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.fmt"  prefix="fmt" %>
+<%@ page session="true" %>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/style.css" />
+<header class="topbar">
+    <div class="brand">Snake Game</div>
+    <nav>
+        <a href="${pageContext.request.contextPath}/main">Menu</a>
+        <a href="${pageContext.request.contextPath}/leaderboard">Leaderboard</a>
+        <a href="${pageContext.request.contextPath}/rules">Rules</a>
+    </nav>
+    <div class="user">
+        <c:choose>
+            <c:when test="${not empty sessionScope.user}">
+                ${sessionScope.user.nickname}
+                <a class="logout" href="${pageContext.request.contextPath}/logout">(logout)</a>
+            </c:when>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/login">Login</a>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</header>

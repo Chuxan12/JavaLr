@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  snake:
+    build: .
+    ports: [ "8080:8080" ]
+    volumes:
+      - ./logs:/usr/local/tomcat/logs
+      - ./data:/usr/local/tomcat/data   # persists H2 database files

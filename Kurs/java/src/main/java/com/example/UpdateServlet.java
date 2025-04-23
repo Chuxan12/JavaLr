@@ -1,10 +1,10 @@
 package com.example;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper; // <--- Добавьте эту строку
 import java.io.IOException;
@@ -13,9 +13,16 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import com.example.dao.LeaderboardDao;
+import com.example.model.LeaderboardEntry;
+import java.time.Instant;
 
 @WebServlet("/update")
 public class UpdateServlet extends HttpServlet {
+    private LeaderboardDao leaderboardDao;
+    @Override public void init() {
+        leaderboardDao = (LeaderboardDao) getServletContext().getAttribute("leaderboardDao");
+    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("\n=== NEW REQUEST ===");
         
@@ -57,6 +64,22 @@ public class UpdateServlet extends HttpServlet {
             }
     
             game.update();
+
+            boolean justFinished = game.isGameOver() && session.getAttribute("recorded") == null;
+            if (justFinished) {
+                session.setAttribute("recorded", Boolean.TRUE);
+            
+                var user = (com.example.model.User) session.getAttribute("user");
+                if (user != null) {
+                    leaderboardDao.add(
+                        new LeaderboardEntry(
+                            user.getNickname(),
+                            game.getScore(),
+                            Instant.now()                 // текущее время как Instant
+                        )
+                    );
+                }
+            }
     
             // Отправка обновлённого состояния
             ObjectMapper mapper = new ObjectMapper();

@@ -1,18 +1,20 @@
 package com.example;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import jakarta.servlet.http.HttpServletRequestWrapper;
 
 import java.io.IOException;
 
-@WebServlet("/init")
-public class InitServlet extends HttpServlet {
+@jakarta.servlet.annotation.WebServlet("/init")
+public class InitServlet extends jakarta.servlet.http.HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws IOException {
-        HttpSession session = request.getSession(true); // Важно!
+        jakarta.servlet.http.HttpSession session = request.getSession(true); // Важно!
         session.setAttribute("game", new GameState());
         response.sendRedirect("game.jsp");
     }
