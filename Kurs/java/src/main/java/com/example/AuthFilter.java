@@ -4,33 +4,43 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.util.Set;
 
 @WebFilter("/*")
 public class AuthFilter implements Filter {
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+    private static final Set<String> PUBLIC = Set.of(
+        "/login", "/register", "/logout", "/main"
+    );
+
+    public void doFilter(ServletRequest req, ServletResponse res,
+                         FilterChain chain)
             throws IOException, ServletException {
+
         HttpServletRequest  r = (HttpServletRequest) req;
-        HttpServletResponse h = (HttpServletResponse) res;
-        String uri = r.getRequestURI().substring(r.getContextPath().length()); // "/static/style.css" → "/static/style.css"
-    
-        // 1️⃣ Отдаём статику без авторизации
-        if (uri.startsWith("/static/")) {
+        HttpServletResponse s = (HttpServletResponse) res;
+
+        // путь без ctx-prefix
+        String path = r.getRequestURI()
+                       .substring(r.getContextPath().length());
+
+        /* 1️⃣  CSS/JS/картинки */
+        if (path.startsWith("/static/")) {
+            chain.doFilter(req, res);   // <-- пропускаем дальше
+            return;
+        }
+
+        /* 2️⃣ гостевые страницы */
+        if (PUBLIC.contains(path)) {
             chain.doFilter(req, res);
             return;
         }
-    
-        // 2️⃣ Разрешаем публичные страницы
-        if (uri.equals("/login") || uri.equals("/register") || uri.equals("/logout")) {
-            chain.doFilter(req, res);
-            return;
-        }
-    
-        // 3️⃣ Защищённые URL → проверяем сессию
-        if (r.getSession(false) != null && r.getSession(false).getAttribute("user") != null) {
-            chain.doFilter(req, res);
+
+        /* 3️⃣ защита приватных страниц */
+        HttpSession sess = r.getSession(false);
+        if (sess == null || sess.getAttribute("user") == null) {
+            s.sendRedirect(r.getContextPath() + "/login");
         } else {
-            h.sendRedirect(r.getContextPath() + "/login");
+            chain.doFilter(req, res);
         }
     }
 }

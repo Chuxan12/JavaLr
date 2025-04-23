@@ -24,16 +24,24 @@ public class RegisterServlet extends HttpServlet {
         String login     = req.getParameter("login");
         String nickname  = req.getParameter("nickname");
         String password  = req.getParameter("password");
+        String password2 = req.getParameter("password2");
 
-        if (login==null||nickname==null||password==null||login.isBlank()||nickname.isBlank()||password.isBlank()) {
-            resp.sendRedirect("/register?error=empty");
+        // simple validation
+        if (login==null||nickname==null||password==null||password2==null ||
+            login.isBlank()||nickname.isBlank()||password.isBlank()) {
+            resp.sendRedirect(req.getContextPath()+"/register?error=empty");
+            return;
+        }
+
+        if (!password.equals(password2)) {
+            resp.sendRedirect(req.getContextPath()+"/register?error=pass");
             return;
         }
 
         String hash = BCrypt.withDefaults().hashToString(12, password.toCharArray());
         boolean ok  = userDao.register(new User(login,nickname,hash));
 
-        if (ok) resp.sendRedirect("/login?registered=1");
-        else    resp.sendRedirect("/register?error=exists");
+        if (ok) resp.sendRedirect(req.getContextPath()+"/login?registered=1");
+        else    resp.sendRedirect(req.getContextPath()+"/register?error=exists");
     }
 }

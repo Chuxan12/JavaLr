@@ -1,23 +1,41 @@
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<%@ taglib uri="jakarta.tags.fmt"  prefix="fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page session="true" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/style.css" />
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.fmt"  prefix="fmt" %>
+
+<!-- Если позже заведёте bundles: -->
+<fmt:setBundle basename="messages"/>
+<fmt:setLocale value="ru_RU"/>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake Game</title>
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/style.css" />
+</head>
+<body>
+
 <header class="topbar">
     <div class="brand">Snake Game</div>
+
     <nav>
-        <a href="${pageContext.request.contextPath}/main">Menu</a>
-        <a href="${pageContext.request.contextPath}/leaderboard">Leaderboard</a>
-        <a href="${pageContext.request.contextPath}/rules">Rules</a>
+        <a href="${pageContext.request.contextPath}/main">Главное меню</a>
+        <a href="${pageContext.request.contextPath}/leaderboard">Таблица лидеров</a>
+        <a href="${pageContext.request.contextPath}/rules">Правила</a>
     </nav>
+
     <div class="user">
         <c:choose>
             <c:when test="${not empty sessionScope.user}">
                 ${sessionScope.user.nickname}
-                <a class="logout" href="${pageContext.request.contextPath}/logout">(logout)</a>
+                <a class="logout"
+                   href="${pageContext.request.contextPath}/logout">(Выйти)</a>
             </c:when>
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/login">Login</a>
+                <a href="${pageContext.request.contextPath}/login">Войти</a>
             </c:otherwise>
         </c:choose>
     </div>

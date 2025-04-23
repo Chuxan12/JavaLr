@@ -1,9 +1,9 @@
 <%@ include file="/WEB-INF/views/_layout.jspf" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/style.css" />
+<html lang="ru">
 <div class="main card">
- <h2>Top 20</h2>
+ <h2>Toп 20</h2>
  <table class="table">
-   <tr><th>#</th><th>Player</th><th>Score</th><th>Date</th></tr>
+   <tr><th>#</th><th>Игрок</th><th>Очки</th><th>Дата</th></tr>
    <c:forEach var="entry" items="${entries}" varStatus="st">
      <tr>
        <td>${st.index+1}</td>
