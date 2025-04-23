@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/_layout.jspf" %>
 
 <div class="main">
@@ -59,11 +59,31 @@
             }
             e.preventDefault();
         });
+
+        /* Рисуем сетку 30×30 (размер клетки 20px) */
+        function drawGrid(){
+            ctx.save();
+            ctx.strokeStyle = '#e5e7eb'; // светло‑серый
+            ctx.lineWidth   = 1;
+            for(let x = 20; x < canvas.width; x += 20){
+                ctx.beginPath();
+                ctx.moveTo(x,0);
+                ctx.lineTo(x,canvas.height);
+                ctx.stroke();
+            }
+            for(let y = 20; y < canvas.height; y += 20){
+                ctx.beginPath();
+                ctx.moveTo(0,y);
+                ctx.lineTo(canvas.width,y);
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
     
         // draw entire frame
         function drawGame(game) {
             ctx.clearRect(0,0,canvas.width,canvas.height);
-    
+            drawGrid();
             /* snake body */
             ctx.fillStyle = '#2ecc71';
             game.snake.forEach(seg => ctx.fillRect(seg.x*20, seg.y*20, 18, 18));

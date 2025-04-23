@@ -12,14 +12,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Snake Game</title>
+    <title>Змейка</title>
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style.css" />
 </head>
 <body>
 
 <header class="topbar">
-    <div class="brand">Snake Game</div>
+    <div class="brand">Змейка</div>
 
     <nav>
         <a href="${pageContext.request.contextPath}/main">Главное меню</a>
