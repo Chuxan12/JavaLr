@@ -17,7 +17,7 @@
   </properties>
 
   <dependencies>
-    <!-- Servlet & JSP APIs provided by Tomcat -->
+
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
@@ -31,9 +31,6 @@
       <scope>provided</scope>
     </dependency>
 
-<!-- JSTL for Jakarta EE 10 (core & fmt already separated) -->
-<!-- JSTL for Jakarta EE – 2.0.0 is the latest version fully published on Maven Central -->
-<!-- JSTL – API + implementation -->
     <dependency>
       <groupId>jakarta.servlet.jsp.jstl</groupId>
       <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
@@ -45,21 +42,18 @@
       <version>3.0.1</version>
     </dependency>
 
-    <!-- JSON (Snake → front‑end) --> 
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.15.2</version>
     </dependency>
 
-    <!-- Password hashing -->
     <dependency>
       <groupId>at.favre.lib</groupId>
       <artifactId>bcrypt</artifactId>
       <version>0.10.2</version>
     </dependency>
 
-    <!-- Embedded DB -->
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
@@ -67,14 +61,12 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!-- Connection pool -->
     <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
       <version>5.1.0</version>
     </dependency>
 
-    <!-- Tests -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -94,8 +86,6 @@
           <release>17</release>
         </configuration>
       </plugin>
-
-      <!-- WAR packager -->
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.4.0</version>

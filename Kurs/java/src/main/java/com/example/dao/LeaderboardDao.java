@@ -4,7 +4,6 @@ import com.example.model.LeaderboardEntry;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
