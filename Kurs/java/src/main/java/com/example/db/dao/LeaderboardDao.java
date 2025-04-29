@@ -1,8 +1,9 @@
-package com.example.dao;
-
-import com.example.model.LeaderboardEntry;
+package com.example.db.dao;
 
 import javax.sql.DataSource;
+
+import com.example.db.model.LeaderboardEntry;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

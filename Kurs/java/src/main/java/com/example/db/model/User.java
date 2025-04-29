@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.db.model;
 
 public class User {
     private final String login;  // unique

@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.db.model;
 
 import java.time.Instant;
 import java.util.Date;

@@ -1,10 +1,11 @@
-package com.example;
+package com.example.page_servlet;
 
-import com.example.dao.LeaderboardDao;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
+
+import com.example.db.dao.LeaderboardDao;
 
 @WebServlet("/leaderboard")
 public class LeaderboardServlet extends HttpServlet {

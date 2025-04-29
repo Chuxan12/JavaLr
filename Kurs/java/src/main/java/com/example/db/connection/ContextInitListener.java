@@ -1,6 +1,6 @@
-package com.example.listeners;
+package com.example.db.connection;
 
-import com.example.dao.*;
+import com.example.db.dao.*;
 import com.example.util.DbUtil;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

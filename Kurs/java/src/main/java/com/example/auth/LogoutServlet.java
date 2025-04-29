@@ -1,4 +1,4 @@
-package com.example;
+package com.example.auth;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;

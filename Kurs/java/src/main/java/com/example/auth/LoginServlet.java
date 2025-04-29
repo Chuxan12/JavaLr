@@ -1,8 +1,10 @@
-package com.example;
+package com.example.auth;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import com.example.dao.UserDao;
-import com.example.model.User;
+
+import com.example.db.dao.UserDao;
+import com.example.db.model.User;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import jakarta.servlet.ServletException;

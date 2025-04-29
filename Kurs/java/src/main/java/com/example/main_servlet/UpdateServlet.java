@@ -1,4 +1,4 @@
-package com.example;
+package com.example.main_servlet;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,8 +13,12 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-import com.example.dao.LeaderboardDao;
-import com.example.model.LeaderboardEntry;
+
+import com.example.db.dao.LeaderboardDao;
+import com.example.db.model.LeaderboardEntry;
+import com.example.game.Direction;
+import com.example.game.GameState;
+
 import java.time.Instant;
 
 @WebServlet("/update")
@@ -69,7 +73,7 @@ public class UpdateServlet extends HttpServlet {
             if (justFinished) {
                 session.setAttribute("recorded", Boolean.TRUE);
             
-                var user = (com.example.model.User) session.getAttribute("user");
+                var user = (com.example.db.model.User) session.getAttribute("user");
                 if (user != null) {
                     leaderboardDao.add(
                         new LeaderboardEntry(

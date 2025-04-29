@@ -1,7 +1,9 @@
-package com.example.dao;
+package com.example.db.dao;
 
-import com.example.model.User;
 import javax.sql.DataSource;
+
+import com.example.db.model.User;
+
 import java.sql.*;
 
 public class UserDao {

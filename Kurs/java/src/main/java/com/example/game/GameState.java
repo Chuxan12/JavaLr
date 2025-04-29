@@ -1,9 +1,10 @@
-package com.example;
+package com.example.game;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import com.fasterxml.jackson.annotation.JsonIgnore; 
 
 public class GameState {
